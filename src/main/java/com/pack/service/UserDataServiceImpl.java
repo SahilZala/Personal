@@ -14,13 +14,13 @@ public class UserDataServiceImpl implements UserDataService {
 	@Autowired
 	UserDataRepository userModelRepository;
 	public UserDataModel findUserDataById(String id) throws UserNotFoundException{
-		if(userModelRepository.findById(id).isEmpty())
+		if(!userModelRepository.findById(id).isPresent())
 			throw new UserNotFoundException("user not found");
 		return userModelRepository.findById(id).get();
 	}
 	@Override
 	public UserDataModel findUserData(String userName) throws UserNotFoundException{
-		if(userModelRepository.findByUserName(userName).isEmpty())
+		if(!userModelRepository.findByUserName(userName).isPresent())
 			throw new UserNotFoundException("user not found");
 		return userModelRepository.findByUserName(userName).get();
 	}
